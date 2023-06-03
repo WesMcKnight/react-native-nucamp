@@ -3,7 +3,7 @@ import { PARTNERS } from "../shared/partners";
 import { useState } from "react";
 
 const AboutScreen = () => {
-    const [partners, setPartners] = useState("");
+    const [partners, setPartners] = useState(PARTNERS);
     return(
         <ScrollView>
             <Mission />
