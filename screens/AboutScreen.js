@@ -1,18 +1,23 @@
-import { ScrollView } from "react-native/types"
-import { PARTNERS } from "../shared/partners";
-import { useState } from "react";
+import { ScrollView } from "react-native"
+import { Avatar, Card, ListItem } from 'react-native-elements';
+import { useSelector } from 'react-redux';
+import { baseUrl } from "../shared/baseUrl";
 
 const AboutScreen = () => {
-    const [partners, setPartners] = useState(PARTNERS);
+    const partners = useSelector((state) => state.partners);
+
     return(
         <ScrollView>
             <Mission />
             <Card>
                 <Card.Title>Community Partners</Card.Title>
                 <Card.Divider />
-                {partners.map((partner) => (
+                {partners.partnersArray.map((partner) => (
                     <ListItem key={partner.id}>
-                        <Avatar src={partner.image} rounded />
+                        <Avatar 
+                            src={{ uri: baseUrl + partner.image}} 
+                            rounded 
+                        />
                         <ListItem.Content>
                             <ListItem.Title>
                                 {partner.name}
