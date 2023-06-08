@@ -19,22 +19,21 @@ const campsitesSlice = createSlice({
     name: 'campsites',
     initialState: { isLoading: true, errMess: null, campsitesArray: [] },
     reducers: {},
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchCampsites.pending, (state) => {
+    extraReducers: {
+            [fetchCampsites.pending]: (state) => {
                 state.isLoading = true;
-            })
-            .addCase(fetchCampsites.fulfilled, (state, action) => {
+            },
+            [fetchCampsites.fulfilled]: (state, action) => {
                 state.isLoading = false;
                 state.errMess = null;
                 state.campsitesArray = action.payload;
-            })
-            .addCase(fetchCampsites.rejected, (state, action) => {
+            },
+            [fetchCampsites.rejected]: (state, action) => {
                 state.isLoading = false;
                 state.errMess = action.error
                     ? action.error.message
                     : 'Fetch failed';
-            });
+            }
     }
 });
 

@@ -1,12 +1,38 @@
-import { ScrollView } from "react-native"
+import { ScrollView, Text } from "react-native"
 import { Avatar, Card, ListItem } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { baseUrl } from "../shared/baseUrl";
+import Loading from "../components/LoadingComponent";
 
 const AboutScreen = () => {
     const partners = useSelector((state) => state.partners);
 
-    return(
+    if (partners.isLoading) {
+        return (
+            <ScrollView>
+                <Mission />
+                <Card>
+                    <Card.Title>Community Partners</Card.Title>
+                    <Card.Divider />
+                    <Loading />
+                </Card>
+            </ScrollView>
+        );
+    }
+    if (partners.errMess) {
+        return (
+            <ScrollView>
+                <Mission />
+                <Card>
+                    <Card.Title>Community Partners</Card.Title>
+                    <Card.Divider />
+                    <Text>{partners.errMess}</Text>
+                </Card>
+            </ScrollView>
+        );
+    }
+
+    return (
         <ScrollView>
             <Mission />
             <Card>
@@ -14,9 +40,9 @@ const AboutScreen = () => {
                 <Card.Divider />
                 {partners.partnersArray.map((partner) => (
                     <ListItem key={partner.id}>
-                        <Avatar 
-                            src={{ uri: baseUrl + partner.image}} 
-                            rounded 
+                        <Avatar
+                            src={{ uri: baseUrl + partner.image }}
+                            rounded
                         />
                         <ListItem.Content>
                             <ListItem.Title>
@@ -38,7 +64,7 @@ const Mission = () => {
         <Card>
             <Card.Title>"Our Mission"</Card.Title>
             <Card.Divider />
-            <Text style={{margin:10}}>
+            <Text style={{ margin: 10 }}>
                 We present a curated database of the best campsites in the vast woods and backcountry of the World Wide Web Wilderness. We increase access to adventure for the public while promting safe and respectful use of resources. The expert wilderness trekkers on our staff personally verify each campsite to make sure that they are up to our standards. We also present a platform for campers to share reviews on campsites they have visited with each other.
             </Text>
         </Card>
