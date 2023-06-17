@@ -37,7 +37,7 @@ const CampsiteInfoScreen = ({ route }) => {
 
     const renderCommentItem = ({item}) => {
         return (
-            <View style={StyleSheet.commentItem}>
+            <View style={styles.commentItem}>
                 <Text style={{ fontSize: 14 }}>{item.text}</Text>
                 <Rating 
                     startingValue={item.rating}
@@ -81,7 +81,7 @@ const CampsiteInfoScreen = ({ route }) => {
                                 dispatch(toggleFavorite(campsite.id))
                             } 
                         />
-                        <Text style={styles.commentsTitle}>Comments</Text>   
+                        <Text style={styles.commentTitle}>Comments</Text>   
                     </>
                 }
             />
